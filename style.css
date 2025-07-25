@@ -44,3 +44,22 @@ button.getfish {
 div.br {
     height: 8px;
 }
+
+span.fishupg {
+    font-size: 15px;
+}
+
+button.fishupg {
+    font-size: 12px;
+    height: 21px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid black;
+    background: white;
+}
+
+div.fishupg {
+    border: 1px solid black;
+    margin-left: 100px;
+    margin-right: 100px;
+}

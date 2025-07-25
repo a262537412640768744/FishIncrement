@@ -24,7 +24,7 @@ function setattr(obj1, obj2) {
 }
 
 function load() {
-    let game_load = JSON.parse(localStorage.getItem("game"))
+    let game_load = JSON.parse(localStorage.getItem("fishIncrement"))
     if (!game_load) return
     transformtoE(game_load)
     if (game_load.fish) {
@@ -35,5 +35,5 @@ function load() {
 load()
 
 function save() {
-    localStorage.setItem("game", JSON.stringify(game()))
+    localStorage.setItem("fishIncrement", JSON.stringify(game()))
 }

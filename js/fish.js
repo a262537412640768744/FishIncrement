@@ -1,12 +1,15 @@
 let fish = {
     fish: new E(0),
     getfish: [new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0)],
-    addfish: [new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0)]
+    addfish: [new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0)],
+    upgrade: [new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0), new E(0)]
 }
 
 let nfish = n => n ? "氵".repeat(n - 1) + "渔" : "鱼"
 let ncost = n => new E(2).pow(new E(4).pow(n - 1).mul(fish.getfish[n - 1].mul(2).add(1)))
-let nfish_all = n => fish.getfish[n - 1].add(fish.addfish[n - 1]).mul(new E(2).pow(fish.getfish[n - 1]))
+let nmult = n => new E(2).pow(fish.getfish[n - 1]).
+    mul(fish.fish.pow((n - 1) ? fish.upgrade[n - 2].div(new E(4).pow(n)) : 0))
+let nfishget = n => fish.getfish[n - 1].add(fish.addfish[n - 1]).mul(nmult(n))
 
 function buy_fish(n) {
     if (fish.fish.gte(ncost(n))) {
@@ -15,18 +18,48 @@ function buy_fish(n) {
     }
 }
 
+function buymax_fish(n) {
+    if (fish.fish.gte(ncost(n))) {
+        fish.getfish[n - 1] = fish.fish.log().div(Math.LN2).
+            div(new E(4).pow(n - 1)).sub(1).div(2).ceil()
+    }
+}
+
+function buymax_fish_all() {
+    buymax_fish(1)
+    buymax_fish(2)
+    buymax_fish(3)
+    buymax_fish(4)
+    buymax_fish(5)
+    buymax_fish(6)
+    buymax_fish(7)
+    buymax_fish(8)
+}
+
+function display_maxfish(n) {
+    return fish.upgrade[7].eq(1) ? 
+        `<button class="getfish" onmousedown="buymax_fish(${n})">购买最大</button>` : ""
+}
+
+function display_maxfish_all() {
+    return fish.upgrade[7].eq(1) ? 
+        `<button class="getfish" onmousedown="buymax_fish_all()">全部购买最大</button>` : ""
+}
+
 function display_getfish(n) {
     return `<div class="getfish">
     <span class="getfish">你有 ${format(fish.getfish[n - 1].add(fish.addfish[n - 1]))}
-${nfish(n)}，${nfish(n)}乘数 × ${format(new E(2).pow(fish.getfish[n - 1]))}，生产
-${format(nfish_all(n))} ${nfish(n - 1)}/秒</span>
+${nfish(n)}，${nfish(n)}乘数 × ${format(nmult(n))}，生产
+${format(nfishget(n))} ${nfish(n - 1)}/秒</span>
     <button class="getfish" onmousedown="buy_fish(${n})">授人以${nfish(n)}，消耗
 ${format(ncost(n))} 鱼</button>
+    ${display_maxfish(n)}
 </div>`
 }
 
 function display_fish_all() {
-    return `${display_getfish(1)}
+    return `${display_maxfish_all()}
+${display_getfish(1)}
 <div class="br"></div>
 ${display_getfish(2)}
 <div class="br"></div>
@@ -44,9 +77,11 @@ ${display_getfish(8)}`
 }
 
 function update_fish(body) {
-    fish.fish = fish.fish.add(nfish_all(1).mul(0.02))
+    fish.fish = fish.fish.add(nfishget(1).mul(0.02))
     for (let n = 1; n < 8; n++) {
-        fish.addfish[n - 1] = fish.addfish[n - 1].add(nfish_all(n + 1).mul(0.02))
+        fish.addfish[n - 1] = fish.addfish[n - 1].add(nfishget(n + 1).mul(0.02))
     }
-    body.innerHTML = display_fish_all()
+    if (card[0] == 0 && card[1] == 0) {
+        body.innerHTML = display_fish_all()
+    }
 }
