@@ -1,0 +1,97 @@
+* {
+    text-align: center;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 23px;
+}
+
+button.fish {
+    font-size: 19px;
+    height: 35px;
+    width: 140px;
+    border: 3px solid black;
+    background: white;
+}
+
+button.select1, button.select2 {
+    font-size: 18px;
+    height: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 3px solid black;
+    background: white;
+}
+
+div.getfish {
+    border: 1px solid black;
+}
+
+span.getfish {
+    font-size: 17px;
+}
+
+button.getfish {
+    font-size: 12px;
+    height: 33px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid black;
+    background: white;
+}
+
+div.br {
+    height: 8px;
+}
+
+span.fishupg {
+    font-size: 15px;
+}
+
+button.fishupg {
+    font-size: 12px;
+    height: 21px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid black;
+    background: white;
+}
+
+div.fishupg {
+    border: 1px solid black;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+span.fire{
+    font-size: 19px;
+}
+
+div.fire{
+    color: #ff4000;
+    border: 1px solid #ff4000;
+    background: linear-gradient(to right, #800000, #804000);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+button.fire{
+    font-size: 15px;
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ff4000;
+    border: 2px solid #ff4000;
+    background: linear-gradient(to right, #800000, #804000);
+}
+
+button.fire-buy{
+    font-size: 15px;
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ff4000;
+    border: 2px solid #ff4000;
+    background: linear-gradient(to right, #ff8080, #ffc080);
+}
